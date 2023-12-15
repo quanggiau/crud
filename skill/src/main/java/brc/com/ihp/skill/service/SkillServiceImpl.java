@@ -1,13 +1,11 @@
 package brc.com.ihp.skill.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import brc.com.ihp.skill.repository.SkillRepository;
+import brc.com.ihp.common.BaseResponse;
 import brc.com.ihp.skill.entity.SkillEntity;
+import brc.com.ihp.skill.repository.SkillRepository;
 
 @Service
 public class SkillServiceImpl implements SkillService {
@@ -15,30 +13,52 @@ public class SkillServiceImpl implements SkillService {
     private SkillRepository skillRepository;
 
     @Override
-    public List<SkillEntity> getAll() {
-        return skillRepository.findAll();
+    public BaseResponse getAll() {
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(skillRepository.findAll());
+        baseResponse.setStatus("success");
+        baseResponse.setMessage(null);
+        return baseResponse;
     }
 
     @Override
-    public Optional<SkillEntity> getDetail(long id) {
-        return skillRepository.findBySkillID(id);
+    public BaseResponse getDetail(long id) {
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(skillRepository.findById(id));
+        baseResponse.setStatus("success");
+        baseResponse.setMessage(null);
+        return baseResponse;
     }
 
     @Override
-    public String save(SkillEntity skillEntity) {
+    public BaseResponse save(SkillEntity skillEntity) {
         skillRepository.save(skillEntity);
-        return "Save ok";
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(99);
+        baseResponse.setStatus("success");
+        baseResponse.setMessage(null);
+        return baseResponse;
+
     }
 
     @Override
-    public String delete(Long id) {
+    public BaseResponse delete(Long id) {
         skillRepository.deleteById(id);
-        return "Delete SkillID " + id + " OK";
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(null);
+        baseResponse.setStatus("success");
+        baseResponse.setMessage(null);
+        return baseResponse;
     }
 
     @Override
-    public SkillEntity updateSkill(SkillEntity skillEntity) {
-        return skillRepository.save(skillEntity);
+    public BaseResponse updateSkill(SkillEntity skillEntity) {
+        skillRepository.save(skillEntity);
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(998);
+        baseResponse.setStatus("success");
+        baseResponse.setMessage(null);
+        return baseResponse;
     }
 
 }

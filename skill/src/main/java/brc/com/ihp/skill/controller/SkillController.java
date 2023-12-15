@@ -1,20 +1,18 @@
 package brc.com.ihp.skill.controller;
 
-import java.util.List;
-import java.util.Optional;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import brc.com.ihp.common.BaseResponse;
 import brc.com.ihp.skill.entity.SkillEntity;
 import brc.com.ihp.skill.service.SkillService;
-import org.springframework.web.bind.annotation.PutMapping;
-
-
-
 
 @RestController
 public class SkillController {
@@ -24,32 +22,37 @@ public class SkillController {
         this.skillService = skillService;
     }
 
-    @GetMapping("/skill/getall")
-    public List<SkillEntity> getAll() {
-        return skillService.getAll();
+    @GetMapping("/skills")
+    public ResponseEntity<?> getAll() {
+        BaseResponse baseResponse = skillService.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(baseResponse);
     }
 
-    @GetMapping("/skill/{id}")
-    public Optional<SkillEntity> getDetail(@PathVariable(value = "id") Long id) {
-        return skillService.getDetail(id);
+    @GetMapping("/skills/{id}")
+    public ResponseEntity<?> getDetail(@PathVariable(value = "id") Long id) {
+        BaseResponse baseResponse = skillService.getDetail(id);
+        return ResponseEntity.status(HttpStatus.OK).body(baseResponse);
 
     }
 
-    @PostMapping("/skill/save")
-    public String save(@RequestBody SkillEntity skillEntity) {
-       return skillService.save(skillEntity);
-        
+    @PostMapping("/skills")
+    public ResponseEntity<?> save(@RequestBody SkillEntity skillEntity) {
+        BaseResponse baseResponse = skillService.save(skillEntity);
+        return ResponseEntity.status(HttpStatus.OK).body(baseResponse);
+
     }
 
-    @GetMapping("skill/delete/{id}")
-    public String delete(@PathVariable(value = "id") Long id) {
-        return skillService.delete(id);
+    @DeleteMapping("skills/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
+        BaseResponse baseResponse = skillService.delete(id);
+        return ResponseEntity.status(HttpStatus.OK).body(baseResponse);
+
     }
-    
-    @PutMapping("skill/update")
-    public SkillEntity updateSkill(@RequestBody SkillEntity skillEntity) {
-        return skillService.updateSkill(skillEntity);
+
+    @PutMapping("skills/{id}")
+    public ResponseEntity<?> updateSkill(@RequestBody SkillEntity skillEntity) {
+        BaseResponse baseResponse = skillService.updateSkill(skillEntity);
+        return ResponseEntity.status(HttpStatus.OK).body(baseResponse);
     }
-    
 
 }

@@ -1,5 +1,7 @@
 package brc.com.ihp.skill.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,122 +10,123 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "skill")
+@Table(name = "skills")
 public class SkillEntity {
     /**
-     * Skill Id
+     * Id
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "skill_id")
-    private Long skillID;
+    @Column(name = "id")
+    private Long id;
 
     /**
      * Skill Name
      */
-    @Column(name = "skill_name", nullable = false)
-    private String skillName;
+    @Column(name = "name", nullable = false, length = 255)
+    private String name;
 
     /**
-     * Skill Code
+     * Skill note
      */
-    @Column(name = "skill_code", nullable = false, length = 40)
-    private String skillCode;
+    @Column(name = "note", length = 2000)
+    private String note;
+
+    @Column(name = "status", columnDefinition = "boolean default false")
+    private boolean status;
+
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @Column(name = "updated_at")
+    private Date updatedAt;
 
     /**
-     * Skill Description
+     * @return Long return the id
      */
-    @Column(name = "skill_description", length = 2000)
-    private String skillDescription;
-
-    @Column(name = "company_id", nullable = false)
-    private int companyID;
-
-    @Column(name = "is_delete", columnDefinition = "boolean default false")
-    private boolean isDelete;
-
-    /**
-     * @return Long return the skillID
-     */
-    public Long getSkillID() {
-        return skillID;
+    public Long getId() {
+        return id;
     }
 
     /**
-     * @param skillID the skillID to set
+     * @param id the id to set
      */
-    public void setSkillID(Long skillID) {
-        this.skillID = skillID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
-     * @return String return the skillName
+     * @return String return the name
      */
-    public String getSkillName() {
-        return skillName;
+    public String getName() {
+        return name;
     }
 
     /**
-     * @param skillName the skillName to set
+     * @param name the name to set
      */
-    public void setSkillName(String skillName) {
-        this.skillName = skillName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
-     * @return String return the skillCode
+     * @return String return the node
      */
-    public String getSkillCode() {
-        return skillCode;
+
+    /**
+     * @return boolean return the status
+     */
+    public boolean isStatus() {
+        return status;
     }
 
     /**
-     * @param skillCode the skillCode to set
+     * @param status the status to set
      */
-    public void setSkillCode(String skillCode) {
-        this.skillCode = skillCode;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     /**
-     * @return String return the skillDescription
+     * @return Date return the createdAt
      */
-    public String getSkillDescription() {
-        return skillDescription;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
     /**
-     * @param skillDescription the skillDescription to set
+     * @param createdAt the createdAt to set
      */
-    public void setSkillDescription(String skillDescription) {
-        this.skillDescription = skillDescription;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     /**
-     * @return int return the companyID
+     * @return Date return the updatedAt
      */
-    public int getCompanyID() {
-        return companyID;
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
     /**
-     * @param companyID the companyID to set
+     * @param updatedAt the updatedAt to set
      */
-    public void setCompanyID(int companyID) {
-        this.companyID = companyID;
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     /**
-     * @return boolean return the isDelete
+     * @return String return the note
      */
-    public boolean isIsDelete() {
-        return isDelete;
+    public String getNote() {
+        return note;
     }
 
     /**
-     * @param isDelete the isDelete to set
+     * @param note the note to set
      */
-    public void setIsDelete(boolean isDelete) {
-        this.isDelete = isDelete;
+    public void setNote(String note) {
+        this.note = note;
     }
 
 }
